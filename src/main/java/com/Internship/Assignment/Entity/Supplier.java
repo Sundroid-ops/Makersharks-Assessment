@@ -29,7 +29,7 @@ public class Supplier {
     private String name;
 
     @NotEmpty(message = "website cannot be empty")
-    @NotNull(message = "name cannot be set to null")
+    @NotNull(message = "website cannot be set to null")
     private String website;
 
     @NotEmpty(message = "location cannot be empty")
