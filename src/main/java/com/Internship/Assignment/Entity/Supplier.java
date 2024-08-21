@@ -2,15 +2,10 @@ package com.Internship.Assignment.Entity;
 
 import com.Internship.Assignment.Entity.Enums.Business;
 import com.Internship.Assignment.Entity.Enums.Manufacture;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.UUID;
@@ -19,6 +14,9 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "_supplier")
 public class Supplier {
     @Id
     private UUID supplier_id;
