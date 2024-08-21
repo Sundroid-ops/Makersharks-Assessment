@@ -36,7 +36,7 @@ public class SupplierServiceImpl implements SupplierService {
             return savedSupplier;
 
         }catch (Exception e){
-            logs.error("Error saving supplier: {}", e.getMessage(), e);
+            logs.error("Error saving supplier: {}", e.getMessage());
             throw new InternalServerException("Supplier Data could not be saved");
         }
     }
