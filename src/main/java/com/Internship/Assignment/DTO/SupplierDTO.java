@@ -24,11 +24,9 @@ public class SupplierDTO {
     @NotNull(message = "website cannot be set to null")
     private String website;
 
-    @NotEmpty(message = "business cannot be empty")
     @NotNull(message = "business cannot be set to null")
     private Business business;
 
-    @NotEmpty(message = "manufacture cannot be empty")
     @NotNull(message = "manufacture cannot be set to null")
     private Manufacture manufacture;
 }

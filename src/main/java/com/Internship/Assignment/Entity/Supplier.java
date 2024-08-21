@@ -37,12 +37,10 @@ public class Supplier {
     private String location;
 
     @Enumerated(EnumType.STRING)
-    @NotEmpty(message = "business cannot be empty")
     @NotNull(message = "business cannot be set to null")
     private Business business;
 
     @Enumerated(EnumType.STRING)
-    @NotEmpty(message = "manufacture cannot be empty")
     @NotNull(message = "manufacture cannot be set to null")
     private Manufacture manufacture;
 }
