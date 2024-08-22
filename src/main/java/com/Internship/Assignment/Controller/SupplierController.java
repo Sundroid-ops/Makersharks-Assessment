@@ -26,7 +26,7 @@ public class SupplierController {
 
     @PostMapping("/create")
     public ResponseEntity<Supplier> saveSupplier(@Valid @RequestBody SupplierDTO supplierDTO){
-        logs.info("Incoming Request for saving new Supplier Data : {}", supplierDTO);
+        logs.info("Incoming POST Request for saving new Supplier Data : {}", supplierDTO);
         Supplier savedSupplier = supplierService.saveSupplier(supplierDTO);
         logs.info("Supplier Successfully created: {}", savedSupplier);
 
@@ -35,7 +35,7 @@ public class SupplierController {
 
     @GetMapping("/{supplierID}")
     public ResponseEntity<Supplier> getSupplierByID(@NotNull @PathVariable UUID supplierID){
-        logs.info("Incoming request to search for supplier by ID : {}", supplierID);
+        logs.info("Incoming GET request to search for supplier by ID : {}", supplierID);
         Supplier getSupplier = supplierService.getSupplierByID(supplierID);
         logs.info("Supplier found by ID : {}", getSupplier);
 
@@ -48,7 +48,7 @@ public class SupplierController {
             @NotNull @RequestParam Business business,
             @NotNull @RequestParam Manufacture manufacture,
             @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
-        logs.info("Incoming request for searching suppliers by querying");
+        logs.info("Incoming POST request for searching suppliers by querying");
         List<Supplier> getSuppliersPage  = supplierService.searchSuppliers(location, business, manufacture, page, size);
 
         if(getSuppliersPage.isEmpty()) {
