@@ -1,6 +1,7 @@
 package com.Internship.Assignment.Advice;
 
 import com.Internship.Assignment.Exception.InternalServerException;
+import com.Internship.Assignment.Exception.SupplierNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -38,5 +39,12 @@ public class RestResponseExceptionHandler {
     public ResponseEntity<String> handleEnumErrors(HttpMessageNotReadableException notReadableException){
         logs.warn("Invalid Enums Type : {}", notReadableException.getMessage());
         return ResponseEntity.badRequest().body(notReadableException.getCause().getMessage());
+    }
+
+    @ExceptionHandler(SupplierNotFoundException.class)
+    public ResponseEntity<ErrorMessage> supplierNotFoundException(SupplierNotFoundException notFoundException){
+        ErrorMessage err = new ErrorMessage(HttpStatus.NOT_FOUND, notFoundException.getMessage());
+        logs.warn("Supplier Data not found : {}", notFoundException.getMessage());
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
     }
 }
