@@ -10,6 +10,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,5 +47,12 @@ public class RestResponseExceptionHandler {
         ErrorMessage err = new ErrorMessage(HttpStatus.NOT_FOUND, notFoundException.getMessage());
         logs.warn("Supplier Data not found : {}", notFoundException.getMessage());
         return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorMessage> MethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException mismatchException){
+        logs.warn("specify data more clearly for : {}", mismatchException.getPropertyName());
+        ErrorMessage err = new ErrorMessage(HttpStatus.BAD_REQUEST, mismatchException.getMessage());
+        return ResponseEntity.badRequest().body(err);
     }
 }
