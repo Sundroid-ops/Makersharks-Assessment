@@ -49,9 +49,15 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier getSupplierByID(UUID supplierID) {
+        Supplier getSupplier = null;
         logs.info("Finding supplier by ID : {}", supplierID);
-        Supplier getSupplier = supplierRepo.findById(supplierID)
-                .orElseThrow(() -> new SupplierNotFoundException("No Supplier Data Found for ID : " + supplierID));
+        try {
+            getSupplier = supplierRepo.findById(supplierID)
+                    .orElseThrow(() -> new SupplierNotFoundException("No Supplier Data Found for ID : " + supplierID));
+
+        }catch (Exception exception){
+            logs.error("Error while searching for supplier by ID : {}", supplierID);
+        }
         logs.info("Supplier found : {}", getSupplier);
 
         return getSupplier;
@@ -60,7 +66,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public List<Supplier> searchSuppliers
             (String location, Business business, Manufacture manufacture, int page, int size) {
-        Page<Supplier> getSuppliersPagination;
+        Page<Supplier> getSuppliersPagination = null;
         logs.info("searching Suppliers by location, business and manufacture queries");
         try {
             getSuppliersPagination = supplierRepo.getSuppliersByLocationAndBusinessAndManufacture(location, business, manufacture, PageRequest.of(page, size));
