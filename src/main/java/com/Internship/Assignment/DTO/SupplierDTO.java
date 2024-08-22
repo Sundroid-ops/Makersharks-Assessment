@@ -2,6 +2,8 @@ package com.Internship.Assignment.DTO;
 
 import com.Internship.Assignment.Entity.Enums.Business;
 import com.Internship.Assignment.Entity.Enums.Manufacture;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -25,8 +27,10 @@ public class SupplierDTO {
     private String website;
 
     @NotNull(message = "business cannot be set to null")
+    @Enumerated(EnumType.STRING)
     private Business business;
 
     @NotNull(message = "manufacture cannot be set to null")
+    @Enumerated(EnumType.STRING)
     private Manufacture manufacture;
 }
