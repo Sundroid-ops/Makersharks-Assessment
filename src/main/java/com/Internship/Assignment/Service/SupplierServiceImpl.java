@@ -3,12 +3,14 @@ package com.Internship.Assignment.Service;
 import com.Internship.Assignment.DTO.SupplierDTO;
 import com.Internship.Assignment.Entity.Supplier;
 import com.Internship.Assignment.Exception.InternalServerException;
+import com.Internship.Assignment.Exception.SupplierNotFoundException;
 import com.Internship.Assignment.Repository.SupplierRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -18,6 +20,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     private static final Logger logs = LoggerFactory.getLogger(SupplierServiceImpl.class);
 
+    @Override
     public Supplier saveSupplier(SupplierDTO supplierDTO){
         Supplier supplier = Supplier.builder()
                 .supplier_id(UUID.randomUUID())
@@ -38,5 +41,15 @@ public class SupplierServiceImpl implements SupplierService {
             logs.error("Error saving supplier: {}", e.getMessage());
             throw new InternalServerException("Supplier Data could not be saved");
         }
+    }
+
+    @Override
+    public Supplier getSupplierByID(UUID supplierID) {
+        logs.info("Finding supplier by ID : {}", supplierID);
+        Supplier getSupplier = supplierRepo.findById(supplierID)
+                .orElseThrow(() -> new SupplierNotFoundException("No Supplier Data Found for ID : " + supplierID));
+        logs.info("Supplier found : {}", getSupplier);
+
+        return getSupplier;
     }
 }
