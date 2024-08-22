@@ -3,6 +3,7 @@ package com.Internship.Assignment.Advice;
 import com.Internship.Assignment.Exception.InternalServerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -25,5 +26,10 @@ public class RestResponseExceptionHandler {
                 forEach(err -> exceptions.put(err.getField(), err.getDefaultMessage()));
 
         return ResponseEntity.badRequest().body(exceptions);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<String> handleEnumErrors(HttpMessageNotReadableException notReadableException){
+        return ResponseEntity.badRequest().body(notReadableException.getCause().getMessage());
     }
 }
