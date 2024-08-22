@@ -1,4 +1,4 @@
-package com.Internship.Assignment.Service.Interface;
+package com.Internship.Assignment.Service;
 
 import com.Internship.Assignment.DTO.SupplierDTO;
 import com.Internship.Assignment.Entity.Supplier;

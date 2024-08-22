@@ -1,10 +1,9 @@
-package com.Internship.Assignment.Service.Impl;
+package com.Internship.Assignment.Service;
 
 import com.Internship.Assignment.DTO.SupplierDTO;
 import com.Internship.Assignment.Entity.Supplier;
 import com.Internship.Assignment.Exception.InternalServerException;
 import com.Internship.Assignment.Repository.SupplierRepo;
-import com.Internship.Assignment.Service.Interface.SupplierService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

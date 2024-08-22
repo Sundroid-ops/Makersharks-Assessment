@@ -2,7 +2,7 @@ package com.Internship.Assignment.Controller;
 
 import com.Internship.Assignment.DTO.SupplierDTO;
 import com.Internship.Assignment.Entity.Supplier;
-import com.Internship.Assignment.Service.Interface.SupplierService;
+import com.Internship.Assignment.Service.SupplierService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
