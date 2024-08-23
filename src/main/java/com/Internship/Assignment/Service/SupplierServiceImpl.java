@@ -28,11 +28,11 @@ public class SupplierServiceImpl implements SupplierService {
     public Supplier saveSupplier(SupplierDTO supplierDTO){
         Supplier supplier = Supplier.builder()
                 .supplier_id(UUID.randomUUID())
-                .name(supplierDTO.getName())
+                .company_name(supplierDTO.getCompany_name())
                 .location(supplierDTO.getLocation())
                 .website(supplierDTO.getWebsite())
-                .business(supplierDTO.getBusiness())
-                .manufacture(supplierDTO.getManufacture())
+                .nature_of_business(supplierDTO.getNature_of_business())
+                .manufacturing_processes(supplierDTO.getManufacturing_processes())
                 .build();
 
         try {

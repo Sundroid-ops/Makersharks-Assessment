@@ -31,20 +31,20 @@ class SupplierServiceImplTest {
     void setUp() {
         Supplier supplier1 = Supplier.builder()
                 .supplier_id(UUID.randomUUID())
-                .name("abc")
+                .company_name("abc")
                 .location("India")
                 .website("www.abc.com")
-                .business(Business.large_scale)
-                .manufacture(Manufacture.casting)
+                .nature_of_business(Business.large_scale)
+                .manufacturing_processes(Manufacture.casting)
                 .build();
 
         Supplier supplier2 = Supplier.builder()
                 .supplier_id(UUID.randomUUID())
-                .name("xyz")
+                .company_name("xyz")
                 .location("India")
                 .website("www.xyz.com")
-                .business(Business.large_scale)
-                .manufacture(Manufacture.casting)
+                .nature_of_business(Business.large_scale)
+                .manufacturing_processes(Manufacture.casting)
                 .build();
 
         List<Supplier> supplierList = Arrays.asList(supplier1, supplier2);
@@ -66,7 +66,7 @@ class SupplierServiceImplTest {
 
         assertNotNull(supplierPage);
         assertEquals(2, supplierPage.getTotalElements());
-        assertEquals("xyz", supplierPage.getContent().get(1).getName());
-        assertEquals(Manufacture.casting, supplierPage.getContent().get(0).getManufacture());
+        assertEquals("xyz", supplierPage.getContent().get(1).getCompany_name());
+        assertEquals(Manufacture.casting, supplierPage.getContent().get(0).getManufacturing_processes());
     }
 }

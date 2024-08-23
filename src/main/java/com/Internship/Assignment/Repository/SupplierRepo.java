@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Repository
 public interface SupplierRepo extends JpaRepository<Supplier, UUID> {
-    @Query("SELECT s FROM Supplier s WHERE s.location=:location AND s.business=:business AND s.manufacture=:manufacture")
+    @Query("SELECT s FROM Supplier s WHERE s.location=:location AND s.nature_of_business=:business AND s.manufacturing_processes=:manufacture")
     Page<Supplier> getSuppliersByLocationAndBusinessAndManufacture
             (@Param("location") String location, @Param("business") Business business, @Param("manufacture") Manufacture manufacture, Pageable pageable);
 }

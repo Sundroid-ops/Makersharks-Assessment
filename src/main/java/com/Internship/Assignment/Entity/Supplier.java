@@ -24,7 +24,7 @@ public class Supplier {
     @Length(min = 4, max = 20, message = "Name should have more than 3 and less than 20 characters")
     @NotEmpty(message = "name cannot be empty")
     @NotNull(message = "name cannot be set to null")
-    private String name;
+    private String company_name;
 
     @NotEmpty(message = "website cannot be empty")
     @NotNull(message = "website cannot be set to null")
@@ -36,9 +36,9 @@ public class Supplier {
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "business cannot be set to null")
-    private Business business;
+    private Business nature_of_business;
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "manufacture cannot be set to null")
-    private Manufacture manufacture;
+    private Manufacture manufacturing_processes;
 }
