@@ -14,10 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
@@ -52,18 +49,19 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier getSupplierByID(UUID supplierID) {
-        Supplier getSupplier = null;
+        Optional<Supplier> getSupplier = Optional.empty();
         logs.info("Finding supplier by ID : {}", supplierID);
         try {
-            getSupplier = supplierRepo.findById(supplierID)
-                    .orElseThrow(() -> new SupplierNotFoundException("No Supplier Data Found for ID : " + supplierID));
-
+            getSupplier = supplierRepo.findById(supplierID);
         }catch (Exception exception){
             logs.error("Error while searching for supplier by ID : {}", supplierID);
         }
-        logs.info("Supplier found : {}", getSupplier);
 
-        return getSupplier;
+        if(getSupplier.isEmpty())
+            throw new SupplierNotFoundException("No Supplier Data Found for ID : " + supplierID);
+
+        logs.info("Supplier found : {}", getSupplier);
+        return getSupplier.get();
     }
 
     @Override
