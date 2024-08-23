@@ -79,6 +79,9 @@ public class SupplierServiceImpl implements SupplierService {
             throw new InternalServerException("Error while searching suppliers by querying");
         }
 
+        if(getSuppliersPagination.isEmpty())
+            throw new SupplierNotFoundException("No Supplier found for + " + location + ", " +  business + ", " + manufacture.toString());
+
         logs.info("search completed for finding page of suppliers by querying");
 
         return getSuppliersPagination.getContent();
