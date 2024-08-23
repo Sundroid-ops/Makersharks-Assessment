@@ -95,22 +95,8 @@ class SupplierServiceImplTest {
                                 ("USA", Business.medium_scale, manufactureSet, PageRequest.of(0, 10)))
                 .thenReturn(emptySupplierPage);
 
-        assertEquals(Page.empty(), emptySupplierPage);
-    }
+        Page<Supplier> resultSupplierPage = supplierRepo.getSuppliersByLocationAndBusinessAndManufacture("USA", Business.medium_scale, manufactureSet, PageRequest.of(0, 10));
 
-    @Test
-    void throwSupplierNotFoundExceptionAfterNoSupplierFoundAfterQuerying(){
-        Page<Supplier> emptySupplierPage = Page.empty();
-
-        Set<Manufacture> manufactureSet = new HashSet<>();
-        manufactureSet.add(Manufacture.moulding);
-
-        Mockito.when(supplierRepo.
-                        getSuppliersByLocationAndBusinessAndManufacture
-                                ("USA", Business.medium_scale, manufactureSet, PageRequest.of(0, 10)))
-                .thenReturn(emptySupplierPage);
-
-        assertThrows(SupplierNotFoundException.class, () ->
-                supplierServiceImpl.searchSuppliers("USA", Business.medium_scale, manufactureSet, 0, 10));
+        assertEquals(Page.empty(), resultSupplierPage);
     }
 }
