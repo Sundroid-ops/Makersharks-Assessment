@@ -52,11 +52,6 @@ public class SupplierController {
         logs.info("Incoming POST request for searching suppliers by querying");
         List<Supplier> getSuppliersPage  = supplierService.searchSuppliers(location, business, manufacture, page, size);
 
-        if(getSuppliersPage.isEmpty()) {
-            logs.info("Found no such supplier Data after querying");
-            return ResponseEntity.noContent().build();
-        }
-
         logs.info("Supplier Data found after querying");
         return ResponseEntity.ok().body(getSuppliersPage);
     }
