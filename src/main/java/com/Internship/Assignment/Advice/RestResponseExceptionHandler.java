@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -53,6 +54,12 @@ public class RestResponseExceptionHandler {
     public ResponseEntity<ErrorMessage> MethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException mismatchException){
         logs.warn("specify data more clearly for : {}", mismatchException.getPropertyName());
         ErrorMessage err = new ErrorMessage(HttpStatus.BAD_REQUEST, mismatchException.getMessage());
+        return ResponseEntity.badRequest().body(err);
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ErrorMessage>  MissingServletRequestParameterException(MissingServletRequestParameterException servletRequestParameterException){
+        ErrorMessage err = new ErrorMessage(HttpStatus.BAD_REQUEST, servletRequestParameterException.getMessage());
         return ResponseEntity.badRequest().body(err);
     }
 }
