@@ -10,11 +10,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Repository
 public interface SupplierRepo extends JpaRepository<Supplier, UUID> {
-    @Query("SELECT s FROM Supplier s WHERE s.location=:location AND s.nature_of_business=:business AND s.manufacturing_processes=:manufacture")
+    @Query("SELECT s FROM Supplier s JOIN s.manufacturing_processes mp WHERE s.location=:location AND s.nature_of_business=:business AND mp IN :manufacture")
     Page<Supplier> getSuppliersByLocationAndBusinessAndManufacture
-            (@Param("location") String location, @Param("business") Business business, @Param("manufacture") Manufacture manufacture, Pageable pageable);
+            (@Param("location") String location, @Param("business") Business business, @Param("manufacture") Set<Manufacture> manufacture, Pageable pageable);
 }

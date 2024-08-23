@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -40,5 +42,13 @@ public class Supplier {
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "manufacture cannot be set to null")
-    private Manufacture manufacturing_processes;
+    @ElementCollection
+    private Set<Manufacture> manufacturing_processes;
+
+    public void addManufacturingProcesses(Set<Manufacture> manufacturingProcesses){
+        if(manufacturing_processes == null)
+            manufacturing_processes = new HashSet<>();
+
+        manufacturing_processes.addAll(manufacturingProcesses);
+    }
 }

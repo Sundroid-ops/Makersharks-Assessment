@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.Set;
+
 @Getter
 @Setter
 public class SupplierDTO {
@@ -32,5 +34,5 @@ public class SupplierDTO {
 
     @NotNull(message = "manufacture cannot be set to null")
     @Enumerated(EnumType.STRING)
-    private Manufacture manufacturing_processes;
+    private Set<Manufacture> manufacturing_processes;
 }

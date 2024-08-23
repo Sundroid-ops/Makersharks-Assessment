@@ -14,7 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -32,8 +34,9 @@ public class SupplierServiceImpl implements SupplierService {
                 .location(supplierDTO.getLocation())
                 .website(supplierDTO.getWebsite())
                 .nature_of_business(supplierDTO.getNature_of_business())
-                .manufacturing_processes(supplierDTO.getManufacturing_processes())
                 .build();
+
+        supplier.addManufacturingProcesses(supplierDTO.getManufacturing_processes());
 
         try {
             logs.info("Attempting to save supplier : {}", supplier);
@@ -65,7 +68,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public List<Supplier> searchSuppliers
-            (String location, Business business, Manufacture manufacture, int page, int size) {
+            (String location, Business business, Set<Manufacture> manufacture, int page, int size) {
         Page<Supplier> getSuppliersPagination = null;
         logs.info("searching Suppliers by location, business and manufacture queries");
         try {

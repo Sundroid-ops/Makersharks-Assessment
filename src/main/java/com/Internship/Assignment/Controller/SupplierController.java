@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -46,7 +47,7 @@ public class SupplierController {
     public ResponseEntity<List<Supplier>> searchSuppliers(
             @NotNull @RequestParam String location,
             @NotNull @RequestParam Business business,
-            @NotNull @RequestParam Manufacture manufacture,
+            @NotNull @RequestParam Set<Manufacture> manufacture,
             @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
         logs.info("Incoming POST request for searching suppliers by querying");
         List<Supplier> getSuppliersPage  = supplierService.searchSuppliers(location, business, manufacture, page, size);

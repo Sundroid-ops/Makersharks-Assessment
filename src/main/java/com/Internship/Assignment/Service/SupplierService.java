@@ -6,6 +6,7 @@ import com.Internship.Assignment.Entity.Enums.Manufacture;
 import com.Internship.Assignment.Entity.Supplier;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public interface SupplierService{
@@ -14,5 +15,5 @@ public interface SupplierService{
     public Supplier getSupplierByID(UUID id);
 
     public List<Supplier> searchSuppliers
-            (String location, Business business, Manufacture manufacture, int page, int size);
+            (String location, Business business, Set<Manufacture> manufacture, int page, int size);
 }
